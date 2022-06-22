@@ -14,11 +14,9 @@ $ mvn clean install
 
 ```console
 $ ./mvn spring-boot:run
-
 ```
 
 # APIs
-
 
 
 ## Creación de clientes
@@ -32,7 +30,7 @@ POST http://localhost:8080/api/deunastore/v1/clients
 ```console
 {
     "document": "1804192837",
-    "name": "ana",
+    "name": "veronica",
     "lastName": "flores"
 }
 
