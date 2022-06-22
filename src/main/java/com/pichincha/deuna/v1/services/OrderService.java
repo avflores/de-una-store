@@ -106,7 +106,7 @@ public class OrderService {
             Integer missingStock = amount - product.getStock();
             if(missingStock > 10)
                 throw new BusinessException("P-204", HttpStatus.INTERNAL_SERVER_ERROR
-                        , "Transacción no completada. Faltante es por mas de 10 unidades.");
+                        , "Transacción no completada. Faltante es por más de 10 unidades.");
         }
 
 

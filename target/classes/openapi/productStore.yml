@@ -1,0 +1,46 @@
+openapi: 3.0.1
+info:
+  title: 'PRODUCT STORE'
+  description: 'Products Store'
+  version: 1.0.0
+tags:
+  - name: productStore
+    description: Products Store
+paths:
+  /productsStores:
+    post:
+      tags:
+        - productStore
+      summary: Save product and store
+      description: Save product and store
+      operationId: save
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductStore'
+      responses:
+        201:
+          description: created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductStore'
+components:
+  schemas:
+    ProductStore:
+      type: object
+      properties:
+        idProductStore:
+          type: integer
+          format: int64
+          description: 'Cod Product Store'
+        idProduct:
+          type: integer
+          format: int64
+          description: 'Id Products'
+        idStore:
+          type: integer
+          format: int64
+          description: 'Id Store'

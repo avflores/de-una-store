@@ -33,7 +33,7 @@ public class ClientService {
     @Transactional
     public ClientDto update (Long idClient,ClientDto body) {
         Client client = clientRepository.findById(idClient)
-                .orElseThrow(() -> new BusinessException("P-204", HttpStatus.NO_CONTENT, "Not entity with Id"));
+                .orElseThrow(() -> new BusinessException("P-204", HttpStatus.NO_CONTENT, "Cliente no encontrado."));
         client.setDocument(body.getDocument());
         client.setName(body.getName());
         client.setLastName(body.getLastName());

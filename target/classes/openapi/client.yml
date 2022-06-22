@@ -1,0 +1,115 @@
+openapi: 3.0.1
+info:
+  title: 'CLIENT'
+  description: 'Client Store'
+  version: 1.0.0
+tags:
+  - name: client
+    description: Client Store
+paths:
+  /clients:
+    post:
+      tags:
+        - client
+      summary: Save client
+      description: Save client
+      operationId: save
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Client'
+      responses:
+        201:
+          description: created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Client'
+  /clients/{idClient}:
+    put:
+      tags:
+        - client
+      summary: Update client
+      description: Update client
+      operationId: update
+      parameters:
+        - name: idClient
+          in: path
+          description: Id Client
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Client'
+      responses:
+        200:
+          description: created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Client'
+    delete:
+      tags:
+        - client
+      summary: Delete client
+      description: Delete client
+      operationId: delete
+      parameters:
+        - name: idClient
+          in: path
+          description: Id Client
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        20O:
+          description: success
+          content: {}
+        204:
+          description: no content
+          content: {}
+    get:
+      tags:
+        - client
+      summary: Finds client given cod
+      description: Finds client
+      operationId: findAById
+      parameters:
+        - name: idClient
+          in: path
+          description: Id Client
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Client'
+components:
+  schemas:
+    Client:
+      type: object
+      properties:
+        idClient:
+          type: integer
+          format: int64
+        document:
+          type: string
+        name:
+          type: string
+        lastName:
+          type: string
+        picture:
+          type: string

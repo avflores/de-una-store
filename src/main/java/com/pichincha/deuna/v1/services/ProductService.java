@@ -41,7 +41,7 @@ public class ProductService {
     @Transactional
     public ProductDto update (Long idProduct, ProductDto body) {
         Product product = productRepository.findById(idProduct)
-                .orElseThrow(() -> new BusinessException("P-204", HttpStatus.NO_CONTENT, "Not entity with Id"));
+                .orElseThrow(() -> new BusinessException("P-204", HttpStatus.NO_CONTENT, "Producto no encontrado."));
         product.setCod(body.getCod());
         product.setName(body.getName());
         product.setPrice(body.getPrice());
@@ -54,7 +54,7 @@ public class ProductService {
     public ProductDto update (Long idProduct,  ProductStockOnlyDto body) {
         validate(body);
         Product product = productRepository.findById(idProduct)
-                .orElseThrow(() -> new BusinessException("P-204", HttpStatus.NO_CONTENT, "Not entity with Id"));
+                .orElseThrow(() -> new BusinessException("P-204", HttpStatus.NO_CONTENT, "Producto no encontrado."));
         product.setStock(body.getStock());
 
         return productMapper.toProductDto(productRepository.save(product));
@@ -62,10 +62,10 @@ public class ProductService {
 
     private void validate(ProductStockOnlyDto body) {
        if (Objects.isNull(body.getStock())) {
-           throw new ValidationException("Stock cannot be null");
+           throw new ValidationException("Stock no puede ser nulo");
        }
        if (body.getStock() < 1) {
-           throw new IllegalArgumentException("Stock must be 1+");
+           throw new IllegalArgumentException("Stock tiene que ser mayor a uno");
        }
     }
 
@@ -76,7 +76,7 @@ public class ProductService {
 
     public ProductDto findById(Long id) {
         Product client = productRepository.findById(id)
-                .orElseThrow(() -> new BusinessException("P-204", HttpStatus.NO_CONTENT, "Not entity with Id"));
+                .orElseThrow(() -> new BusinessException("P-204", HttpStatus.NO_CONTENT, "Producto no encontrado."));
         return productMapper.toProductDto(client);
     }
 
