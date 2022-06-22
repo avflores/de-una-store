@@ -1,0 +1,118 @@
+openapi: 3.0.1
+info:
+  title: 'PRODUCTS'
+  description: 'Store Products'
+  version: 1.0.0
+tags:
+  - name: product
+    description: Store products
+paths:
+  /products:
+    get:
+      tags:
+        - product
+      summary: Finds all products
+      description: Finds all products and return cod and name.
+      operationId: findAll
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductList'
+  /products/{idProduct}:
+    get:
+      tags:
+        - product
+      summary: Finds products given cod
+      description: Finds products and return cod and name.
+      operationId: findAByCod
+      parameters:
+        - name: idProduct
+          in: path
+          description: Id Product
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        204:
+          description: no content.
+          content: { }
+    patch:
+      tags:
+        - product
+      summary: Update product stock by idProduct
+      description: Update product stock by idProduct
+      operationId: updateStock
+      parameters:
+        - name: idProduct
+          in: path
+          description: Id Product
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductStockOnly'
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        204:
+          description: no content.
+          content: { }
+
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          sample: 123
+        cod:
+          type: string
+          sample: codigo1
+          description: 'Codigo Products'
+        name:
+          type: string
+          sample: producto1
+        price:
+          type: number
+          sample: 23.50
+        stock:
+          type: integer
+          sample: 100
+    ProductList:
+      type: array
+      items:
+        type: object
+        $ref: '#/components/schemas/Product'
+    ProductStockOnly:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          sample: 123
+        stock:
+          type: integer
+          sample: 100
+          minimum: 1
+          required: true

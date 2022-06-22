@@ -1,0 +1,68 @@
+openapi: 3.0.1
+info:
+  title: 'ORDER PRODUCT STORE'
+  description: 'Order Products Store'
+  version: 1.0.0
+tags:
+  - name: order
+    description: Order
+paths:
+  /clients/{idClient}/orders:
+    post:
+      tags:
+        - order
+      summary: Save order
+      description: Save order
+      operationId: createOrder
+      parameters:
+        - name: idClient
+          in: path
+          description: Id Client
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        201:
+          description: created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderHeader'
+components:
+  schemas:
+    Item:
+      type: object
+      properties:
+        idProduct:
+          type: integer
+          format: int64
+        idStore:
+          type: integer
+          format: int64
+        amount:
+            type: integer
+    Order:
+      type: array
+      items:
+        type: object
+        $ref: '#/components/schemas/Item'
+    OrderHeader:
+      type: object
+      properties:
+        idOrderHeader:
+          type: integer
+        idClient:
+          type: integer
+        dateOrder:
+          type: string
+          format: date
+        total:
+          type: integer
+          format: int64
